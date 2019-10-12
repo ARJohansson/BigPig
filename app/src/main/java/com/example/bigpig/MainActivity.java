@@ -2,7 +2,6 @@ package com.example.bigpig;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
 import android.os.Bundle;
 
 // Imports the widgets
@@ -18,15 +17,19 @@ import android.widget.Button;
 import android.widget.TextView.OnEditorActionListener;
 import android.view.View.OnClickListener;
 
+// imports the number format tool
+import java.text.NumberFormat;
+
 public class MainActivity extends AppCompatActivity
 implements OnEditorActionListener, OnClickListener {
 
-    // Variables for the Widgets
+    // Global variables for the Widgets
     private PigGame game;
     private EditText player1, player2;
     private TextView score1, score2, playerTurn, playerScore;
     private ImageView dieNumber;
-    private Button rollDie, turnEnd, playAgain;
+    // local variable for button widgets as they're not used elsewhere
+    Button rollDie, turnEnd, playAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,52 +49,40 @@ implements OnEditorActionListener, OnClickListener {
         turnEnd = (Button) findViewById(R.id.endTurnButton);
         playAgain = (Button) findViewById(R.id.newGameButton);
 
-        // Sets the listeners
+        // Sets the listeners to the button and EditText Widgets
         rollDie.setOnClickListener(this);
         turnEnd.setOnClickListener(this);
         playAgain.setOnClickListener(this);
         player1.setOnEditorActionListener(this);
         player2.setOnEditorActionListener(this);
 
+        // starts the game
         startGame();
     }
 
     // Starts the Pig Game
     public void startGame() {
         //Local variables
-        String p1, p2, turn, p1ScoreString, p2ScoreString, playerTotalString;
-        int p1Score, p2Score, playerTotal, dieNum;
-        p1 = player1.getText().toString();
-        p2 = player2.getText().toString();
-        turn = playerTurn.getText().toString();
-        p1ScoreString = score1.getText().toString();
-        p2ScoreString = score2.getText().toString();
-        playerTotalString = playerScore.getText().toString();
+        String p1, p2, pTurn;
 
-        // If any of the strings are empty sets the ints to 0
-        if (p1ScoreString.equals("") ) {
-            p1Score = 0;
-        }
-        // Otherwise assign the integer to the corresponding parsed string
-        else
-            p1Score = Integer.parseInt(p1ScoreString);
+        // gets the players' names
+        p1 = game.getPlayer1Name();
+        p2 = game.getPlayer2Name();
+        // Sets the players' names
+        player1.setText(p1);
+        player2.setText(p2);
 
-        if (p2ScoreString.equals("")) {
-            p2Score = 0;
-        }
-        else
-            p2Score = Integer.parseInt(p2ScoreString);
-
-        if (playerTotalString.equals("")) {
-            playerTotal = 0;
-        }
-        else
-            playerTotal = Integer.parseInt(playerTotalString);
-
-        game.setPlayer1Name(p1);
-        game.setPlayer2Name(p2);
-
+        // displays the initial scores
         displayScores();
+
+        // Displays whose turn it is
+        pTurn = game.getCurrentPlayer();
+        if (pTurn == "") {
+            playerTurn.setText("____'s Turn");
+        }
+        else
+            playerTurn.setText(pTurn);
+
     }
 
     // Sets the die Image using the rolled die number
@@ -129,18 +120,38 @@ implements OnEditorActionListener, OnClickListener {
         dieNumber.setImageResource(id);
     }
 
+    // displays the scores based on integers
     private void displayScores() {
-        playerScore.setText(game.getTurnPoints());
-        score1.setText(game.getPlayer1Score());
-        score2.setText(game.getPlayer2Score());
+        // local variables
+        int p1Score, p2Score, playerTotal;
+
+        // gets the scores
+        p1Score = game.getPlayer1Score();
+        p2Score = game.getPlayer2Score();
+        playerTotal = game.getTurnPoints();
+
+        // sets the scores using formatting
+        NumberFormat integer = NumberFormat.getIntegerInstance();
+        playerScore.setText(integer.format(playerTotal));
+        score1.setText(integer.format(p1Score));
+        score2.setText(integer.format(p2Score));
     }
 
+    // if the enter key on the hard keyboard or the done key on the soft
+    // keyboard are entered this event listener will activate and set the
+    // players' names
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE ||
             actionId == EditorInfo.IME_ACTION_UNSPECIFIED)
         {
-            startGame();
+            String p1, p2;
+            // gets and sets Player One's name
+            p1 = player1.getText().toString();
+            game.setPlayer1Name(p1);
+            // gets and sets Player Two's name
+            p2 = player2.getText().toString();
+            game.setPlayer2Name(p2);
         }
         return false;
     }
@@ -149,18 +160,23 @@ implements OnEditorActionListener, OnClickListener {
     public void onClick(View v) {
         int n = 0;
         switch (v.getId()) {
-            case R.id.dieRollButton:
-                n = game.rollDie();
-                dieImage(n);
-                //displayScores();
+            case R.id.dieRollButton:    // If the dieRoll button is pressed:
+                n = game.rollDie();     // we'll roll the die and assign it to a var
+                dieImage(n);            // and assign an image based on that var
+                displayScores();        // display scores
                 break;
-            case R.id.endTurnButton:
-                n = game.changeTurn();
+            case R.id.endTurnButton:    // If the endTurn button is pressed:
+                game.changeTurn();      // we'll change who's playing
+                String pTurn;
+                pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
+                playerTurn.setText(pTurn);  // and set the new text
                 break;
-            case R.id.newGameButton:
-                game.resetGame();
-                score1.setText(game.getPlayer1Score());
-                score2.setText(game.getPlayer2Score());
+            case R.id.newGameButton:    // If the newGame button is pressed:
+                game.resetGame();       // we call the PigGame's reset method
+                displayScores();        // display zeroed scores
+                dieImage(8);        // reset the original dice image
+                player1.setText("");    // rename the players
+                player2.setText("");
                 break;
         }
     }

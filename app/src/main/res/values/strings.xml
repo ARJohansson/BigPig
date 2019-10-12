@@ -10,7 +10,7 @@
     <string name="score2TV">0</string>
     <string name="turn">Who\'s turn</string>
     <string name="points">Points for this turn</string>
-    <string name="pointsTV">0</string>
+    <string name="pointsTV"></string>
     <string name="picDescription">DieRoll</string>
     <string name="dieRoll">Roll Die</string>
     <string name="endTurn">End Turn</string>
