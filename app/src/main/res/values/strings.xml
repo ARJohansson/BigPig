@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BigPig</string>
+    <string name="player_name1">Player 1</string>
+    <string name="player_name2">Player 2</string>
+    <string name="player_edit1" >Person</string>
+    <string name="player_edit2">Comp</string>
+    <string name="score">Score</string>
+    <string name="score2">Score</string>
+    <string name="score1TV">0</string>
+    <string name="score2TV">0</string>
+    <string name="turn">Who\'s turn</string>
+    <string name="points">Points for this turn</string>
+    <string name="pointsTV">0</string>
+    <string name="picDescription">DieRoll</string>
+    <string name="dieRoll">Roll Die</string>
+    <string name="endTurn">End Turn</string>
+    <string name="newGame">New Game</string>
+</resources>
