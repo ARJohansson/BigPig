@@ -3,6 +3,7 @@ package com.example.bigpig;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
 // Imports the widgets
@@ -67,6 +68,17 @@ implements OnEditorActionListener, OnClickListener {
 
         // starts the game
         startGame();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(SCORE_1, game.getPlayer1Score());
+        savedInstanceState.putInt(SCORE_2, game.getPlayer2Score());
+        savedInstanceState.putInt(CURRENT_SCORE, game.getTurnPoints());
+        savedInstanceState.putString(PLAYER_1, game.getPlayer1Name());
+        savedInstanceState.putString(Player_2, game.getPlayer2Name());
+        savedInstanceState.putString(CURRENT_PLAYER, game.getCurrentPlayer());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     // Starts the Pig Game
@@ -188,16 +200,5 @@ implements OnEditorActionListener, OnClickListener {
                 player2.setText("");
                 break;
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(SCORE_1, game.getPlayer1Score());
-        outState.putInt(SCORE_2, game.getPlayer2Score());
-        outState.putInt(CURRENT_SCORE, game.getTurnPoints());
-        outState.putString(PLAYER_1, game.getPlayer1Name());
-        outState.putString(Player_2, game.getPlayer2Name());
-        outState.putString(CURRENT_PLAYER, game.getCurrentPlayer());
-        super.onSaveInstanceState(outState);
     }
 }
