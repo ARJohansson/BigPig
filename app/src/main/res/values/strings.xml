@@ -15,4 +15,5 @@
     <string name="dieRoll">Roll Die</string>
     <string name="endTurn">End Turn</string>
     <string name="newGame">New Game</string>
+    <string name="player_1">Player 1</string>
 </resources>

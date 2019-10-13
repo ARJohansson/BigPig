@@ -2,6 +2,7 @@ package com.example.bigpig;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 
 // Imports the widgets
@@ -20,6 +21,8 @@ import android.view.View.OnClickListener;
 // imports the number format tool
 import java.text.NumberFormat;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity
 implements OnEditorActionListener, OnClickListener {
 
@@ -28,6 +31,12 @@ implements OnEditorActionListener, OnClickListener {
     private EditText player1, player2;
     private TextView score1, score2, playerTurn, playerScore;
     private ImageView dieNumber;
+    private static final String SCORE_1 = "player_1_score";
+    private static final String SCORE_2 = "player_2_score";
+    private static final String CURRENT_SCORE = "current_player_score";
+    private static final String PLAYER_1 = "player_1_name";
+    private static final String Player_2 = "player_2_name";
+    private static final String CURRENT_PLAYER = "current_player";
     // local variable for button widgets as they're not used elsewhere
     Button rollDie, turnEnd, playAgain;
 
@@ -76,12 +85,7 @@ implements OnEditorActionListener, OnClickListener {
         displayScores();
 
         // Displays whose turn it is
-        pTurn = game.getCurrentPlayer();
-        if (pTurn == "") {
-            playerTurn.setText("____'s Turn");
-        }
-        else
-            playerTurn.setText(pTurn);
+        displayPlayerName();
 
     }
 
@@ -137,6 +141,12 @@ implements OnEditorActionListener, OnClickListener {
         score2.setText(integer.format(p2Score));
     }
 
+    private void displayPlayerName() {
+        String pTurn;
+        pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
+        playerTurn.setText(pTurn);  // and set the new text
+    }
+
     // if the enter key on the hard keyboard or the done key on the soft
     // keyboard are entered this event listener will activate and set the
     // players' names
@@ -164,12 +174,11 @@ implements OnEditorActionListener, OnClickListener {
                 n = game.rollDie();     // we'll roll the die and assign it to a var
                 dieImage(n);            // and assign an image based on that var
                 displayScores();        // display scores
+                displayPlayerName();    // display player names
                 break;
             case R.id.endTurnButton:    // If the endTurn button is pressed:
                 game.changeTurn();      // we'll change who's playing
-                String pTurn;
-                pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
-                playerTurn.setText(pTurn);  // and set the new text
+                displayPlayerName();    // displays the next player's name
                 break;
             case R.id.newGameButton:    // If the newGame button is pressed:
                 game.resetGame();       // we call the PigGame's reset method
@@ -179,5 +188,16 @@ implements OnEditorActionListener, OnClickListener {
                 player2.setText("");
                 break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(SCORE_1, game.getPlayer1Score());
+        outState.putInt(SCORE_2, game.getPlayer2Score());
+        outState.putInt(CURRENT_SCORE, game.getTurnPoints());
+        outState.putString(PLAYER_1, game.getPlayer1Name());
+        outState.putString(Player_2, game.getPlayer2Name());
+        outState.putString(CURRENT_PLAYER, game.getCurrentPlayer());
+        super.onSaveInstanceState(outState);
     }
 }
