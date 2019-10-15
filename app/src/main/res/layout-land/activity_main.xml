@@ -1,201 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity"
-tools:layout_editor_absoluteY="73dp"
-tools:layout_editor_absoluteX="0dp">
-
-<TextView
-    android:id="@+id/textView7"
-    android:layout_width="95dp"
-    android:layout_height="30dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginTop="10dp"
-    android:text="@string/score2TV"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintStart_toStartOf="@+id/textView5"
-    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-<TextView
-    android:id="@+id/textView5"
-    android:layout_width="100dp"
-    android:layout_height="30dp"
-    android:layout_marginTop="18dp"
-    android:text="@string/score2"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintStart_toStartOf="@+id/textView2"
-    app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-<EditText
-    android:id="@+id/editText2"
-    android:layout_width="95dp"
-    android:layout_height="45dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginTop="12dp"
-    android:ems="10"
-    android:inputType="textPersonName"
-    android:text="@string/player_edit2"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintStart_toStartOf="@+id/textView2"
-    app:layout_constraintTop_toBottomOf="@+id/textView2"
-    android:importantForAutofill="no"
-    tools:ignore="LabelFor" />
-
-<TextView
-    android:id="@+id/textView2"
-    android:layout_width="100dp"
-    android:layout_height="30dp"
-    android:layout_marginEnd="80dp"
-    android:text="@string/player_name2"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/textView" />
-
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="100dp"
-    android:layout_height="30dp"
-    android:layout_marginStart="80dp"
-    android:layout_marginTop="40dp"
-    android:text="@string/player_name1"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-<EditText
-    android:id="@+id/editText"
-    android:layout_width="95dp"
-    android:layout_height="45dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginEnd="2dp"
-    android:ems="10"
-    android:inputType="textPersonName"
-    android:text="@string/player_edit1"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintEnd_toEndOf="@+id/textView"
-    app:layout_constraintTop_toBottomOf="@+id/textView"
-    android:importantForAutofill="no"
-    tools:ignore="LabelFor"/>
-
-
-<TextView
-    android:id="@+id/textView4"
-    android:layout_width="100dp"
-    android:layout_height="30dp"
-    android:layout_marginTop="18dp"
-    android:text="@string/score"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintStart_toStartOf="@+id/textView"
-    app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-<TextView
-    android:id="@+id/textView6"
-    android:layout_width="95dp"
-    android:layout_height="30dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginTop="10dp"
-    android:text="@string/score1TV"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintStart_toStartOf="@+id/textView4"
-    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="125dp"
+        android:id="@+id/player1Label"
+        android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginStart="123dp"
-        android:layout_marginEnd="123dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/player_name1"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/player2Label"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/player_name2"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toEndOf="@+id/player1Label"
+        app:layout_constraintTop_toTopOf="@+id/player1Label" />
+
+    <EditText
+        android:id="@+id/player1EditText"
+        android:layout_width="125dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/player_edit1"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/player1Label"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player1Label" />
+
+    <EditText
+        android:id="@+id/player2EditText"
+        android:layout_width="125dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/player_edit2"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/player2Label"
+        app:layout_constraintTop_toBottomOf="@+id/player2Label" />
+
+    <TextView
+        android:id="@+id/p1ScoreLabel"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/score"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/player1EditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player1EditText" />
+
+    <TextView
+        android:id="@+id/p2ScoreLabel"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/score2"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/player2EditText"
+        app:layout_constraintTop_toBottomOf="@+id/player2EditText" />
+
+    <TextView
+        android:id="@+id/p1ScoreTextView"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/score1TV"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/p1ScoreLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p1ScoreLabel" />
+
+    <TextView
+        android:id="@+id/p2ScoreTextView"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="65dp"
+        android:text="@string/score2TV"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/p2ScoreLabel"
+        app:layout_constraintTop_toBottomOf="@+id/p2ScoreLabel" />
+
+    <TextView
+        android:id="@+id/turnLabel"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginEnd="126dp"
         android:text="@string/turn"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintEnd_toStartOf="@+id/player2Label"
+        app:layout_constraintStart_toEndOf="@+id/player1Label"
+        app:layout_constraintTop_toTopOf="@+id/player1Label" />
 
-<ImageView
-    android:id="@+id/imageView"
-    android:layout_width="125dp"
-    android:layout_height="125dp"
-    android:layout_marginTop="12dp"
-    android:contentDescription="@string/picDescription"
-    app:layout_constraintEnd_toEndOf="@+id/textView10"
-    app:layout_constraintHorizontal_bias="0.485"
-    app:layout_constraintStart_toStartOf="@+id/textView10"
-    app:layout_constraintTop_toBottomOf="@+id/textView10"
-    app:srcCompat="@drawable/die8side8" />
+    <ImageView
+        android:id="@+id/diceRollImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="155dp"
+        android:contentDescription="@string/picDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/turnLabel"
+        app:srcCompat="@drawable/die8side8" />
 
-<TextView
-    android:id="@+id/textView9"
-    android:layout_width="wrap_content"
-    android:layout_height="30dp"
-    android:layout_marginTop="10dp"
-    android:text="@string/points"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintEnd_toEndOf="@+id/textView8"
-    app:layout_constraintStart_toStartOf="@+id/textView8"
-    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+    <TextView
+        android:id="@+id/pointLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="121dp"
+        android:text="@string/points"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diceRollImageView" />
 
-<TextView
-    android:id="@+id/textView10"
-    android:layout_width="90dp"
-    android:layout_height="30dp"
-    android:layout_marginTop="5dp"
-    android:text="@string/pointsTV"
-    android:textAlignment="center"
-    android:textColor="#000000"
-    android:textSize="20sp"
-    app:layout_constraintEnd_toEndOf="@+id/textView9"
-    app:layout_constraintStart_toStartOf="@+id/textView9"
-    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+    <TextView
+        android:id="@+id/pointTotalTextView"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="161dp"
+        android:text="@string/pointsTV"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pointLabel" />
 
-<Button
-    android:id="@+id/button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="32dp"
-    android:text="@string/newGame"
-    app:layout_constraintEnd_toEndOf="@+id/imageView"
-    app:layout_constraintHorizontal_bias="0.481"
-    app:layout_constraintStart_toStartOf="@+id/imageView"
-    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <Button
+        android:id="@+id/dieRollButton"
+        android:layout_width="125dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/dieRoll"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/pointTotalTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pointTotalTextView" />
 
-<Button
-    android:id="@+id/button2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/dieRoll"
-    app:layout_constraintStart_toStartOf="@+id/textView6"
-    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <Button
+        android:id="@+id/endTurnButton"
+        android:layout_width="125dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/endTurn"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/pointTotalTextView"
+        app:layout_constraintTop_toBottomOf="@+id/pointTotalTextView" />
 
-<Button
-    android:id="@+id/button3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/endTurn"
-    app:layout_constraintStart_toStartOf="@+id/textView7"
-    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <Button
+        android:id="@+id/newGameButton"
+        android:layout_width="136dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="75dp"
+        android:text="@string/newGame"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/pointTotalTextView"
+        app:layout_constraintStart_toStartOf="@+id/pointTotalTextView"
+        app:layout_constraintTop_toBottomOf="@+id/pointLabel" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout >
