@@ -35,51 +35,14 @@ implements OnEditorActionListener, OnClickListener {
     private static final String SCORE_1 = "player_1_score";
     private static final String SCORE_2 = "player_2_score";
     private static final String CURRENT_SCORE = "current_player_score";
+    private static final String NUM_TURNS = "number_of_turns";
     private static final String PLAYER_1 = "player_1_name";
     private static final String Player_2 = "player_2_name";
     private static final String CURRENT_PLAYER = "current_player";
     // local variable for button widgets as they're not used elsewhere
     Button rollDie, turnEnd, playAgain;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        // Creating references to the data displaying widgets
-        game = new PigGame();
-        player1 = (EditText) findViewById(R.id.player1EditText);
-        player2 = (EditText) findViewById(R.id.player2EditText);
-        score1 = (TextView) findViewById(R.id.p1ScoreTextView);
-        score2 = (TextView) findViewById(R.id.p2ScoreTextView);
-        playerTurn = (TextView) findViewById(R.id.turnLabel);
-        playerScore = (TextView) findViewById(R.id.pointTotalTextView);
-        dieNumber = (ImageView) findViewById(R.id.diceRollImageView);
-        rollDie = (Button) findViewById(R.id.dieRollButton);
-        turnEnd = (Button) findViewById(R.id.endTurnButton);
-        playAgain = (Button) findViewById(R.id.newGameButton);
-
-        // Sets the listeners to the button and EditText Widgets
-        rollDie.setOnClickListener(this);
-        turnEnd.setOnClickListener(this);
-        playAgain.setOnClickListener(this);
-        player1.setOnEditorActionListener(this);
-        player2.setOnEditorActionListener(this);
-
-        // starts the game
-        startGame();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(SCORE_1, game.getPlayer1Score());
-        outState.putInt(SCORE_2, game.getPlayer2Score());
-        outState.putInt(CURRENT_SCORE, game.getTurnPoints());
-        outState.putString(PLAYER_1, game.getPlayer1Name());
-        outState.putString(Player_2, game.getPlayer2Name());
-        outState.putString(CURRENT_PLAYER, game.getCurrentPlayer());
-        super.onSaveInstanceState(outState);
-    }
 
     // Starts the Pig Game
     public void startGame() {
@@ -200,5 +163,61 @@ implements OnEditorActionListener, OnClickListener {
                 player2.setText("");
                 break;
         }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Creating references to the data displaying widgets
+        player1 = (EditText) findViewById(R.id.player1EditText);
+        player2 = (EditText) findViewById(R.id.player2EditText);
+        score1 = (TextView) findViewById(R.id.p1ScoreTextView);
+        score2 = (TextView) findViewById(R.id.p2ScoreTextView);
+        playerTurn = (TextView) findViewById(R.id.turnLabel);
+        playerScore = (TextView) findViewById(R.id.pointTotalTextView);
+        dieNumber = (ImageView) findViewById(R.id.diceRollImageView);
+        rollDie = (Button) findViewById(R.id.dieRollButton);
+        turnEnd = (Button) findViewById(R.id.endTurnButton);
+        playAgain = (Button) findViewById(R.id.newGameButton);
+
+        // Sets the listeners to the button and EditText Widgets
+        rollDie.setOnClickListener(this);
+        turnEnd.setOnClickListener(this);
+        playAgain.setOnClickListener(this);
+        player1.setOnEditorActionListener(this);
+        player2.setOnEditorActionListener(this);
+
+        int p1 = 0, p2 = 0, s = 0, t = 0;
+        String p1Name ="", p2Name = "", cPlayer = "";
+        if(savedInstanceState != null) {
+            p1 = savedInstanceState.getInt(SCORE_1);
+            p2 = savedInstanceState.getInt(SCORE_2);
+            s = savedInstanceState.getInt(CURRENT_SCORE);
+            t = savedInstanceState.getInt(NUM_TURNS);
+            p1Name = savedInstanceState.getString(PLAYER_1);
+            p2Name = savedInstanceState.getString(Player_2);
+            cPlayer = savedInstanceState.getString(CURRENT_PLAYER);
+            game = new PigGame(p1, p2, s, t);
+            game.setPlayer1Name(p1Name);
+            game.setPlayer2Name(p2Name);
+            startGame();
+        }
+        else {// starts the game
+            game = new PigGame();
+            startGame();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(SCORE_1, game.getPlayer1Score());
+        outState.putInt(SCORE_2, game.getPlayer2Score());
+        outState.putInt(CURRENT_SCORE, game.getTurnPoints());
+        outState.putInt(NUM_TURNS, game.getTurn());
+        outState.putString(PLAYER_1, game.getPlayer1Name());
+        outState.putString(Player_2, game.getPlayer2Name());
+        outState.putString(CURRENT_PLAYER, game.getCurrentPlayer());
+        super.onSaveInstanceState(outState);
     }
 }
