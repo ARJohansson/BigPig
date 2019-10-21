@@ -102,17 +102,33 @@ implements OnEditorActionListener, OnClickListener {
     private void displayScores() {
         // local variables
         int p1Score, p2Score, playerTotal;
+        String winner;
 
         // gets the scores
         p1Score = game.getPlayer1Score();
         p2Score = game.getPlayer2Score();
         playerTotal = game.getTurnPoints();
 
-        // sets the scores using formatting
-        NumberFormat integer = NumberFormat.getIntegerInstance();
-        playerScore.setText(integer.format(playerTotal));
-        score1.setText(integer.format(p1Score));
-        score2.setText(integer.format(p2Score));
+        winner = game.checkForWinner();
+
+        if (winner == "") {
+            // sets the scores using formatting
+            NumberFormat integer = NumberFormat.getIntegerInstance();
+            playerScore.setText(integer.format(playerTotal));
+            score1.setText(integer.format(p1Score));
+            score2.setText(integer.format(p2Score));
+        }
+        else if (winner != "tie"){
+            // sets the scores using formatting
+            NumberFormat integer = NumberFormat.getIntegerInstance();
+            score1.setText(integer.format(p1Score));
+            score2.setText(integer.format(p2Score));
+            playerScore.setText(winner + " wins!");
+        }
+        else
+            playerScore.setText("It was a " + winner);
+
+
     }
 
     private void displayPlayerName() {
