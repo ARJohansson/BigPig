@@ -38,7 +38,6 @@ implements OnEditorActionListener, OnClickListener {
     private static final String NUM_TURNS = "number_of_turns";
     private static final String PLAYER_1 = "player_1_name";
     private static final String Player_2 = "player_2_name";
-    private static final String CURRENT_PLAYER = "current_player";
     // local variable for button widgets as they're not used elsewhere
     Button rollDie, turnEnd, playAgain;
 
@@ -153,6 +152,7 @@ implements OnEditorActionListener, OnClickListener {
                 break;
             case R.id.endTurnButton:    // If the endTurn button is pressed:
                 game.changeTurn();      // we'll change who's playing
+                displayScores();        // display scores
                 displayPlayerName();    // displays the next player's name
                 break;
             case R.id.newGameButton:    // If the newGame button is pressed:
@@ -188,8 +188,8 @@ implements OnEditorActionListener, OnClickListener {
         player1.setOnEditorActionListener(this);
         player2.setOnEditorActionListener(this);
 
-        int p1 = 0, p2 = 0, s = 0, t = 0;
-        String p1Name ="", p2Name = "", cPlayer = "";
+        int p1 = 0, p2 = 0, s = 0, t = 0, dieNum;
+        String p1Name ="", p2Name = "";
         if(savedInstanceState != null) {
             p1 = savedInstanceState.getInt(SCORE_1);
             p2 = savedInstanceState.getInt(SCORE_2);
@@ -197,7 +197,6 @@ implements OnEditorActionListener, OnClickListener {
             t = savedInstanceState.getInt(NUM_TURNS);
             p1Name = savedInstanceState.getString(PLAYER_1);
             p2Name = savedInstanceState.getString(Player_2);
-            cPlayer = savedInstanceState.getString(CURRENT_PLAYER);
             game = new PigGame(p1, p2, s, t);
             game.setPlayer1Name(p1Name);
             game.setPlayer2Name(p2Name);
@@ -217,7 +216,6 @@ implements OnEditorActionListener, OnClickListener {
         outState.putInt(NUM_TURNS, game.getTurn());
         outState.putString(PLAYER_1, game.getPlayer1Name());
         outState.putString(Player_2, game.getPlayer2Name());
-        outState.putString(CURRENT_PLAYER, game.getCurrentPlayer());
         super.onSaveInstanceState(outState);
     }
 }
