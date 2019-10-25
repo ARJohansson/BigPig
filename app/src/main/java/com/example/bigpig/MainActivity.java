@@ -2,8 +2,6 @@ package com.example.bigpig;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 
 // Imports the widgets
@@ -22,7 +20,6 @@ import android.view.View.OnClickListener;
 // imports the number format tool
 import java.text.NumberFormat;
 
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
 implements OnEditorActionListener, OnClickListener {
@@ -44,9 +41,9 @@ implements OnEditorActionListener, OnClickListener {
 
 
     // Starts the Pig Game
-    public void startGame() {
+    public void StartGame() {
         //Local variables
-        String p1, p2, pTurn;
+        String p1, p2;
 
         // gets the players' names
         p1 = game.getPlayer1Name();
@@ -56,15 +53,15 @@ implements OnEditorActionListener, OnClickListener {
         player2.setText(p2);
 
         // displays the initial scores
-        displayScores();
+        DisplayScores();
 
         // Displays whose turn it is
-        displayPlayerName();
+        DisplayPlayerName();
 
     }
 
     // Sets the die Image using the rolled die number
-    public void dieImage(int n) {
+    public void DieImage(int n) {
         int id = 0;
         // A switch case statement that will determine the corresponding image
         switch (n)
@@ -99,7 +96,7 @@ implements OnEditorActionListener, OnClickListener {
     }
 
     // displays the scores based on integers
-    private void displayScores() {
+    private void DisplayScores() {
         // local variables
         int p1Score, p2Score, playerTotal;
         String winner;
@@ -131,7 +128,7 @@ implements OnEditorActionListener, OnClickListener {
 
     }
 
-    private void displayPlayerName() {
+    private void DisplayPlayerName() {
         String pTurn;
         pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
         playerTurn.setText(pTurn);  // and set the new text
@@ -162,19 +159,19 @@ implements OnEditorActionListener, OnClickListener {
         switch (v.getId()) {
             case R.id.dieRollButton:    // If the dieRoll button is pressed:
                 n = game.rollDie();     // we'll roll the die and assign it to a var
-                dieImage(n);            // and assign an image based on that var
-                displayScores();        // display scores
-                displayPlayerName();    // display player names
+                DieImage(n);            // and assign an image based on that var
+                DisplayScores();        // display scores
+                DisplayPlayerName();    // display player names
                 break;
             case R.id.endTurnButton:    // If the endTurn button is pressed:
                 game.changeTurn();      // we'll change who's playing
-                displayScores();        // display scores
-                displayPlayerName();    // displays the next player's name
+                DisplayScores();        // display scores
+                DisplayPlayerName();    // displays the next player's name
                 break;
             case R.id.newGameButton:    // If the newGame button is pressed:
                 game.resetGame();       // we call the PigGame's reset method
-                displayScores();        // display zeroed scores
-                dieImage(8);        // reset the original dice image
+                DisplayScores();        // display zeroed scores
+                DieImage(8);        // reset the original dice image
                 player1.setText("");    // rename the players
                 player2.setText("");
                 break;
@@ -216,11 +213,11 @@ implements OnEditorActionListener, OnClickListener {
             game = new PigGame(p1, p2, s, t);
             game.setPlayer1Name(p1Name);
             game.setPlayer2Name(p2Name);
-            startGame();
+            StartGame();
         }
         else {// starts the game
             game = new PigGame();
-            startGame();
+            StartGame();
         }
     }
 
