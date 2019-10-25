@@ -108,22 +108,21 @@ implements OnEditorActionListener, OnClickListener {
 
         winner = game.checkForWinner();
 
-        if (winner == "") {
+        if (winner != "") {
+            // sets the scores using formatting
+            NumberFormat integer = NumberFormat.getIntegerInstance();
+            score1.setText(integer.format(p1Score));
+            score2.setText(integer.format(p2Score));
+            winner += " wins!";
+            playerScore.setText(winner);
+        }
+        else {
             // sets the scores using formatting
             NumberFormat integer = NumberFormat.getIntegerInstance();
             playerScore.setText(integer.format(playerTotal));
             score1.setText(integer.format(p1Score));
             score2.setText(integer.format(p2Score));
         }
-        else if (winner != "tie"){
-            // sets the scores using formatting
-            NumberFormat integer = NumberFormat.getIntegerInstance();
-            score1.setText(integer.format(p1Score));
-            score2.setText(integer.format(p2Score));
-            playerScore.setText(winner + " wins!");
-        }
-        else
-            playerScore.setText("It was a " + winner);
 
 
     }
