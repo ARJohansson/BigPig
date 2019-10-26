@@ -1,6 +1,5 @@
 package com.example.bigpig;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
@@ -20,8 +19,17 @@ import android.view.View.OnClickListener;
 // imports the number format tool
 import java.text.NumberFormat;
 
+// imports everything for preferences and menu not already in app
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.widget.Toast;
+import android.app.Activity;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends Activity
 implements OnEditorActionListener, OnClickListener {
 
     // Global variables for the Widgets
@@ -38,7 +46,11 @@ implements OnEditorActionListener, OnClickListener {
     // local variable for button widgets as they're not used elsewhere
     Button rollDie, turnEnd, playAgain;
 
-
+    // Set up preferences
+    private SharedPreferences prefs;
+    private int defaultDieNumber = 1;
+    private int defaultEvilDie = 8;
+    private int defaultHighSchore = 100;
 
     // Starts the Pig Game
     public void StartGame() {
@@ -200,6 +212,12 @@ implements OnEditorActionListener, OnClickListener {
         player1.setOnEditorActionListener(this);
         player2.setOnEditorActionListener(this);
 
+        // Set the default values for the preferences
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        // get default SharedPreferences object
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         int p1 = 0, p2 = 0, s = 0, t = 0, dieNum;
         String p1Name ="", p2Name = "";
         if(savedInstanceState != null) {
@@ -221,6 +239,12 @@ implements OnEditorActionListener, OnClickListener {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_bigpig_game, menu);
+        return true;
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(SCORE_1, game.getPlayer1Score());
         outState.putInt(SCORE_2, game.getPlayer2Score());
@@ -229,5 +253,18 @@ implements OnEditorActionListener, OnClickListener {
         outState.putString(PLAYER_1, game.getPlayer1Name());
         outState.putString(Player_2, game.getPlayer2Name());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_about:
+                Toast.makeText(this, "About not yet implemented", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_settings:
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
