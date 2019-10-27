@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class PigGame {
 	
-	final private int WINNING_SCORE = 100;
-	
 	private Random rand = new Random();
 	private int player1Score;
 	private int player2Score;
@@ -73,21 +71,45 @@ public class PigGame {
 		turn = 1;
 	}
 
-	public int rollDie()
+	public int rollDie(int evilDie, int numRolls)
 	{
-		int roll = rand.nextInt(8) + 1;
-		
-		if(roll != 8)
-		{
-			turnPoints += roll;
-		}
-		else
-		{
-			turnPoints = 0;
-			changeTurn();
-		}
-		
-		return roll;
+        int roll = rand.nextInt(8) + 1;
+
+	    if (numRolls >1) {
+            int roll2 = rand.nextInt(8) + 1;
+
+            if (numRolls == 3) {
+                int roll3 = rand.nextInt(8) + 1;
+                if (roll != evilDie && roll2 != evilDie && roll3 != evilDie) {
+                    turnPoints += roll + roll2 + roll3;
+                } else {
+                    turnPoints = 0;
+                    changeTurn();
+                }
+                return roll3;
+            }
+            else {
+                if (roll != evilDie && roll2 != evilDie) {
+                    turnPoints += roll + roll2;
+                    }
+                else {
+                    turnPoints = 0;
+                    changeTurn();
+                    return evilDie;
+                }
+                return roll2;
+            }
+	    }
+	    else {
+            if (roll != evilDie) {
+                turnPoints += roll;
+            } else {
+                turnPoints = 0;
+                changeTurn();
+                return evilDie;
+            }
+        }
+            return roll;
 	}
 	
 	public int getTurnPoints()
@@ -116,10 +138,10 @@ public class PigGame {
 		return turn;
 	}
 	
-	public String checkForWinner()
+	public String checkForWinner(int winning_score)
 	{
        String winnerMessage = "";
-        if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
+        if (player1Score >= winning_score || player2Score >= winning_score) {
             if (player2Score > player1Score) {
                 winnerMessage = String.format("%s wins!", player2Name);
             }

@@ -46,11 +46,25 @@ implements OnEditorActionListener, OnClickListener {
     // local variable for button widgets as they're not used elsewhere
     Button rollDie, turnEnd, playAgain;
 
+    // Number Constants for die, score, and evil die
+    private static final int NUM_ONE = 1;
+    private static final int NUM_TWO = 2;
+    private static final int NUM_THREE = 3;
+    private static final int NUM_FOUR = 4;
+    private static final int NUM_FIVE = 5;
+    private static final int NUM_SIX = 6;
+    private static final int NUM_SEVEN = 7;
+    private static final int NUM_EIGHT = 8;
+    private static final int SCORE_ONE = 75;
+    private static final int SCORE_TWO = 100;
+    private static final int SCORE_THREE = 150;
+    private static final int SCORE_FOUR = 200;
+
     // Set up preferences
     private SharedPreferences prefs;
-    private int defaultDieNumber = 1;
-    private int defaultEvilDie = 8;
-    private int defaultHighSchore = 100;
+    private int defaultDieNumber = NUM_ONE;
+    private int defaultEvilDie = NUM_EIGHT;
+    private int defaultHighScore = SCORE_TWO;
 
     // Starts the Pig Game
     public void StartGame() {
@@ -118,7 +132,14 @@ implements OnEditorActionListener, OnClickListener {
         p2Score = game.getPlayer2Score();
         playerTotal = game.getTurnPoints();
 
-        winner = game.checkForWinner();
+        if (defaultHighScore == SCORE_ONE)
+            winner = game.checkForWinner(SCORE_ONE);
+        else if (defaultHighScore == SCORE_TWO)
+            winner = game.checkForWinner(SCORE_TWO);
+        else if (defaultHighScore == SCORE_THREE)
+            winner = game.checkForWinner(SCORE_THREE);
+        else
+            winner = game.checkForWinner(SCORE_FOUR);
 
         if (winner != "") {
             // sets the scores using formatting
@@ -135,14 +156,23 @@ implements OnEditorActionListener, OnClickListener {
             score1.setText(integer.format(p1Score));
             score2.setText(integer.format(p2Score));
         }
-
-
     }
 
     private void DisplayPlayerName() {
         String pTurn;
         pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
         playerTurn.setText(pTurn);  // and set the new text
+    }
+
+    private void DieNumber() {
+        int n = 0;
+
+        // Rolls the die the number of times equal to defaultDieNumber
+        n = game.rollDie(defaultEvilDie, defaultDieNumber);
+        DieImage(n);            // and assign an image based on that var
+        DisplayScores();        // display scores
+        DisplayPlayerName();    // display player names
+
     }
 
     // if the enter key on the hard keyboard or the done key on the soft
@@ -166,13 +196,9 @@ implements OnEditorActionListener, OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int n = 0;
         switch (v.getId()) {
             case R.id.dieRollButton:    // If the dieRoll button is pressed:
-                n = game.rollDie();     // we'll roll the die and assign it to a var
-                DieImage(n);            // and assign an image based on that var
-                DisplayScores();        // display scores
-                DisplayPlayerName();    // display player names
+                DieNumber();
                 break;
             case R.id.endTurnButton:    // If the endTurn button is pressed:
                 game.changeTurn();      // we'll change who's playing
@@ -231,7 +257,7 @@ implements OnEditorActionListener, OnClickListener {
             game.setPlayer1Name(p1Name);
             game.setPlayer2Name(p2Name);
             StartGame();
-        }
+            }
         else {// starts the game
             game = new PigGame();
             StartGame();
@@ -253,6 +279,25 @@ implements OnEditorActionListener, OnClickListener {
         outState.putString(PLAYER_1, game.getPlayer1Name());
         outState.putString(Player_2, game.getPlayer2Name());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        Editor editor = prefs.edit();
+        editor.commit();
+
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // get preferences
+        defaultDieNumber = Integer.parseInt(prefs.getString("pref_number_of_die", "1"));
+        defaultEvilDie = Integer.parseInt(prefs.getString("pref_evil_die", "8"));
+        defaultHighScore = Integer.parseInt(prefs.getString("pref_high_score", "100"));
+
     }
 
     @Override

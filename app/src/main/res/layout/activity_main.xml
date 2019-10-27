@@ -159,7 +159,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/turnLabel"
-        app:srcCompat="@drawable/die8side8" />
+        android:src="@drawable/die8side8"
+        />
 
     <TextView
         android:id="@+id/pointLabel"
@@ -234,9 +235,5 @@
         app:layout_constraintStart_toEndOf="@+id/dieRollButton"
         app:layout_constraintTop_toBottomOf="@+id/dieRollButton" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout >

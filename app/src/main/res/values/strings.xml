@@ -32,9 +32,9 @@
     <string name="number_of_die_title">Number of Die</string>
     <string name="num_die_summary">Change the number of die you want to play with.</string>
     <string-array name="number_of_die">
-        <item >1</item>
-        <item >2</item>
-        <item >3</item>
+        <item >One</item>
+        <item >Two</item>
+        <item >Three</item>
     </string-array>
     <string-array name="number_of_die_values">
         <item >1</item>
@@ -62,14 +62,14 @@
     <string name="evil_die_title">Evil Die</string>
     <string name="evil_die_summary">Change which die erases your current points.</string>
     <string-array name="evil_die_numbers">
-        <item >1</item>
-        <item >2</item>
-        <item >3</item>
-        <item >4</item>
-        <item >5</item>
-        <item >6</item>
-        <item >7</item>
-        <item >8</item>
+        <item >One</item>
+        <item >Two</item>
+        <item >Three</item>
+        <item >Four</item>
+        <item >Five</item>
+        <item >Six</item>
+        <item >Seven</item>
+        <item >Eight</item>
     </string-array>
     <string-array name="evil_die_values">
         <item >1</item>

@@ -160,7 +160,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/turnLabel"
-        app:srcCompat="@drawable/die8side8" />
+        android:src="@drawable/die8side8"
+        />
 
     <TextView
         android:id="@+id/pointLabel"
