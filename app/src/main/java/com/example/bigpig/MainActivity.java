@@ -35,7 +35,7 @@ implements OnEditorActionListener, OnClickListener {
     // Global variables for the Widgets
     private PigGame game;
     private EditText player1, player2;
-    private TextView score1, score2, playerTurn, playerScore;
+    private TextView score1, score2, playerTurn, playerScore, numDie;
     private ImageView dieNumber;
     private static final String SCORE_1 = "player_1_score";
     private static final String SCORE_2 = "player_2_score";
@@ -48,12 +48,6 @@ implements OnEditorActionListener, OnClickListener {
 
     // Number Constants for die, score, and evil die
     private static final int NUM_ONE = 1;
-    private static final int NUM_TWO = 2;
-    private static final int NUM_THREE = 3;
-    private static final int NUM_FOUR = 4;
-    private static final int NUM_FIVE = 5;
-    private static final int NUM_SIX = 6;
-    private static final int NUM_SEVEN = 7;
     private static final int NUM_EIGHT = 8;
     private static final int SCORE_ONE = 75;
     private static final int SCORE_TWO = 100;
@@ -65,6 +59,7 @@ implements OnEditorActionListener, OnClickListener {
     private int defaultDieNumber = NUM_ONE;
     private int defaultEvilDie = NUM_EIGHT;
     private int defaultHighScore = SCORE_TWO;
+    private static final String NUM_DIE = "defaultDieNumber";
 
     // Starts the Pig Game
     public void StartGame() {
@@ -226,6 +221,7 @@ implements OnEditorActionListener, OnClickListener {
         score2 = (TextView) findViewById(R.id.p2ScoreTextView);
         playerTurn = (TextView) findViewById(R.id.turnLabel);
         playerScore = (TextView) findViewById(R.id.pointTotalTextView);
+        numDie = (TextView) findViewById(R.id.numDieTextView);
         dieNumber = (ImageView) findViewById(R.id.diceRollImageView);
         rollDie = (Button) findViewById(R.id.dieRollButton);
         turnEnd = (Button) findViewById(R.id.endTurnButton);
@@ -244,7 +240,7 @@ implements OnEditorActionListener, OnClickListener {
         // get default SharedPreferences object
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        int p1 = 0, p2 = 0, s = 0, t = 0, dieNum;
+        int p1 = 0, p2 = 0, s = 0, t = 0, dieNum = 0;
         String p1Name ="", p2Name = "";
         if(savedInstanceState != null) {
             p1 = savedInstanceState.getInt(SCORE_1);
@@ -253,6 +249,10 @@ implements OnEditorActionListener, OnClickListener {
             t = savedInstanceState.getInt(NUM_TURNS);
             p1Name = savedInstanceState.getString(PLAYER_1);
             p2Name = savedInstanceState.getString(Player_2);
+            dieNum = savedInstanceState.getInt(NUM_DIE);
+
+            NumberFormat integer = NumberFormat.getIntegerInstance();
+            numDie.setText(integer.format(dieNum));
             game = new PigGame(p1, p2, s, t);
             game.setPlayer1Name(p1Name);
             game.setPlayer2Name(p2Name);
@@ -276,6 +276,7 @@ implements OnEditorActionListener, OnClickListener {
         outState.putInt(SCORE_2, game.getPlayer2Score());
         outState.putInt(CURRENT_SCORE, game.getTurnPoints());
         outState.putInt(NUM_TURNS, game.getTurn());
+        outState.putInt(NUM_DIE, defaultDieNumber);
         outState.putString(PLAYER_1, game.getPlayer1Name());
         outState.putString(Player_2, game.getPlayer2Name());
         super.onSaveInstanceState(outState);
@@ -297,6 +298,8 @@ implements OnEditorActionListener, OnClickListener {
         defaultDieNumber = Integer.parseInt(prefs.getString("pref_number_of_die", "1"));
         defaultEvilDie = Integer.parseInt(prefs.getString("pref_evil_die", "8"));
         defaultHighScore = Integer.parseInt(prefs.getString("pref_high_score", "100"));
+        NumberFormat integer = NumberFormat.getIntegerInstance();
+        numDie.setText(integer.format(defaultDieNumber));
 
     }
 

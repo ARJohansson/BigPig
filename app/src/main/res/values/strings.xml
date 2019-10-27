@@ -24,6 +24,9 @@
 
     <string name="newGame">New Game</string>
 
+    <string name="num_die">Number of Die</string>
+    <string name="num_die_text">1</string>
+
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
 
