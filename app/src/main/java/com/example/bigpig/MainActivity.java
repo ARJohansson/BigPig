@@ -284,16 +284,17 @@ implements OnEditorActionListener, OnClickListener {
 
     @Override
     public void onPause() {
+        Bundle bundle = new Bundle();
         Editor editor = prefs.edit();
         editor.commit();
 
+        onSaveInstanceState(bundle);
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         // get preferences
         defaultDieNumber = Integer.parseInt(prefs.getString("pref_number_of_die", "1"));
         defaultEvilDie = Integer.parseInt(prefs.getString("pref_evil_die", "8"));
