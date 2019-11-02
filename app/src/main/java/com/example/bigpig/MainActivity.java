@@ -1,6 +1,5 @@
 package com.example.bigpig;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
@@ -20,14 +19,23 @@ import android.view.View.OnClickListener;
 // imports the number format tool
 import java.text.NumberFormat;
 
+// imports everything for preferences and menu not already in app
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.widget.Toast;
+import android.app.Activity;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends Activity
 implements OnEditorActionListener, OnClickListener {
 
     // Global variables for the Widgets
     private PigGame game;
     private EditText player1, player2;
-    private TextView score1, score2, playerTurn, playerScore;
+    private TextView score1, score2, playerTurn, playerScore, numDie;
     private ImageView dieNumber;
     private static final String SCORE_1 = "player_1_score";
     private static final String SCORE_2 = "player_2_score";
@@ -38,7 +46,20 @@ implements OnEditorActionListener, OnClickListener {
     // local variable for button widgets as they're not used elsewhere
     Button rollDie, turnEnd, playAgain;
 
+    // Number Constants for die, score, and evil die
+    private static final int NUM_ONE = 1;
+    private static final int NUM_EIGHT = 8;
+    private static final int SCORE_ONE = 75;
+    private static final int SCORE_TWO = 100;
+    private static final int SCORE_THREE = 150;
+    private static final int SCORE_FOUR = 200;
 
+    // Set up preferences
+    private SharedPreferences prefs;
+    private int defaultDieNumber = NUM_ONE;
+    private int defaultEvilDie = NUM_EIGHT;
+    private int defaultHighScore = SCORE_TWO;
+    private static final String NUM_DIE = "defaultDieNumber";
 
     // Starts the Pig Game
     public void StartGame() {
@@ -106,32 +127,47 @@ implements OnEditorActionListener, OnClickListener {
         p2Score = game.getPlayer2Score();
         playerTotal = game.getTurnPoints();
 
-        winner = game.checkForWinner();
+        if (defaultHighScore == SCORE_ONE)
+            winner = game.checkForWinner(SCORE_ONE);
+        else if (defaultHighScore == SCORE_TWO)
+            winner = game.checkForWinner(SCORE_TWO);
+        else if (defaultHighScore == SCORE_THREE)
+            winner = game.checkForWinner(SCORE_THREE);
+        else
+            winner = game.checkForWinner(SCORE_FOUR);
 
-        if (winner == "") {
+        if (winner != "") {
+            // sets the scores using formatting
+            NumberFormat integer = NumberFormat.getIntegerInstance();
+            score1.setText(integer.format(p1Score));
+            score2.setText(integer.format(p2Score));
+            winner += " wins!";
+            playerScore.setText(winner);
+        }
+        else {
             // sets the scores using formatting
             NumberFormat integer = NumberFormat.getIntegerInstance();
             playerScore.setText(integer.format(playerTotal));
             score1.setText(integer.format(p1Score));
             score2.setText(integer.format(p2Score));
         }
-        else if (winner != "tie"){
-            // sets the scores using formatting
-            NumberFormat integer = NumberFormat.getIntegerInstance();
-            score1.setText(integer.format(p1Score));
-            score2.setText(integer.format(p2Score));
-            playerScore.setText(winner + " wins!");
-        }
-        else
-            playerScore.setText("It was a " + winner);
-
-
     }
 
     private void DisplayPlayerName() {
         String pTurn;
         pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
         playerTurn.setText(pTurn);  // and set the new text
+    }
+
+    private void DieNumber() {
+        int n = 0;
+
+        // Rolls the die the number of times equal to defaultDieNumber
+        n = game.rollDie(defaultEvilDie, defaultDieNumber);
+        DieImage(n);            // and assign an image based on that var
+        DisplayScores();        // display scores
+        DisplayPlayerName();    // display player names
+
     }
 
     // if the enter key on the hard keyboard or the done key on the soft
@@ -155,13 +191,9 @@ implements OnEditorActionListener, OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int n = 0;
         switch (v.getId()) {
             case R.id.dieRollButton:    // If the dieRoll button is pressed:
-                n = game.rollDie();     // we'll roll the die and assign it to a var
-                DieImage(n);            // and assign an image based on that var
-                DisplayScores();        // display scores
-                DisplayPlayerName();    // display player names
+                DieNumber();
                 break;
             case R.id.endTurnButton:    // If the endTurn button is pressed:
                 game.changeTurn();      // we'll change who's playing
@@ -189,6 +221,7 @@ implements OnEditorActionListener, OnClickListener {
         score2 = (TextView) findViewById(R.id.p2ScoreTextView);
         playerTurn = (TextView) findViewById(R.id.turnLabel);
         playerScore = (TextView) findViewById(R.id.pointTotalTextView);
+        numDie = (TextView) findViewById(R.id.numDieTextView);
         dieNumber = (ImageView) findViewById(R.id.diceRollImageView);
         rollDie = (Button) findViewById(R.id.dieRollButton);
         turnEnd = (Button) findViewById(R.id.endTurnButton);
@@ -201,7 +234,13 @@ implements OnEditorActionListener, OnClickListener {
         player1.setOnEditorActionListener(this);
         player2.setOnEditorActionListener(this);
 
-        int p1 = 0, p2 = 0, s = 0, t = 0, dieNum;
+        // Set the default values for the preferences
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+        // get default SharedPreferences object
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        int p1 = 0, p2 = 0, s = 0, t = 0, dieNum = 0;
         String p1Name ="", p2Name = "";
         if(savedInstanceState != null) {
             p1 = savedInstanceState.getInt(SCORE_1);
@@ -210,15 +249,25 @@ implements OnEditorActionListener, OnClickListener {
             t = savedInstanceState.getInt(NUM_TURNS);
             p1Name = savedInstanceState.getString(PLAYER_1);
             p2Name = savedInstanceState.getString(Player_2);
+            dieNum = savedInstanceState.getInt(NUM_DIE);
+
+            NumberFormat integer = NumberFormat.getIntegerInstance();
+            numDie.setText(integer.format(dieNum));
             game = new PigGame(p1, p2, s, t);
             game.setPlayer1Name(p1Name);
             game.setPlayer2Name(p2Name);
             StartGame();
-        }
+            }
         else {// starts the game
             game = new PigGame();
             StartGame();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_bigpig_game, menu);
+        return true;
     }
 
     @Override
@@ -227,8 +276,44 @@ implements OnEditorActionListener, OnClickListener {
         outState.putInt(SCORE_2, game.getPlayer2Score());
         outState.putInt(CURRENT_SCORE, game.getTurnPoints());
         outState.putInt(NUM_TURNS, game.getTurn());
+        outState.putInt(NUM_DIE, defaultDieNumber);
         outState.putString(PLAYER_1, game.getPlayer1Name());
         outState.putString(Player_2, game.getPlayer2Name());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        Bundle bundle = new Bundle();
+        Editor editor = prefs.edit();
+        editor.commit();
+
+        onSaveInstanceState(bundle);
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // get preferences
+        defaultDieNumber = Integer.parseInt(prefs.getString("pref_number_of_die", "1"));
+        defaultEvilDie = Integer.parseInt(prefs.getString("pref_evil_die", "8"));
+        defaultHighScore = Integer.parseInt(prefs.getString("pref_high_score", "100"));
+        NumberFormat integer = NumberFormat.getIntegerInstance();
+        numDie.setText(integer.format(defaultDieNumber));
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_about:
+                Toast.makeText(this, "About not yet implemented", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_settings:
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

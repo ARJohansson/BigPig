@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="pref_number_of_die"
+        android:title="@string/number_of_die_title"
+        android:summary="@string/num_die_summary"
+        android:dialogTitle="@string/number_of_die_title"
+        android:entries="@array/number_of_die"
+        android:entryValues="@array/number_of_die_values"
+        android:defaultValue="@string/number_of_die_default" />
+    <ListPreference
+        android:key="pref_high_score"
+        android:title="@string/high_score_title"
+        android:summary="@string/high_score_summary"
+        android:dialogTitle="@string/high_score_title"
+        android:entries="@array/high_score"
+        android:entryValues="@array/high_score_values"
+        android:defaultValue="@string/high_score_default" />
+    <ListPreference
+        android:key="pref_evil_die"
+        android:title="@string/evil_die_title"
+        android:summary="@string/evil_die_summary"
+        android:dialogTitle="@string/evil_die_title"
+        android:entries="@array/evil_die_numbers"
+        android:entryValues="@array/evil_die_values"
+        android:defaultValue="@string/evil_die_default"
+        />
+</PreferenceScreen>

@@ -159,7 +159,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/turnLabel"
-        app:srcCompat="@drawable/die8side8" />
+        android:src="@drawable/die8side8"
+        />
 
     <TextView
         android:id="@+id/pointLabel"
@@ -234,9 +235,31 @@
         app:layout_constraintStart_toEndOf="@+id/dieRollButton"
         app:layout_constraintTop_toBottomOf="@+id/dieRollButton" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/numDieLabel"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/num_die"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/turnLabel"
+        app:layout_constraintTop_toBottomOf="@+id/turnLabel" />
+
+    <TextView
+        android:id="@+id/numDieTextView"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/num_die_text"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/numDieLabel"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="@+id/numDieLabel"
+        app:layout_constraintTop_toBottomOf="@+id/numDieLabel" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout >
