@@ -85,4 +85,6 @@
         <item >8</item>
     </string-array>
     <string name="evil_die_default">8</string>
+
+    <string name="gameDescription">Welcome to Big Pig!</string>
 </resources>
