@@ -77,14 +77,11 @@ implements OnClickListener{
         activity.setGame(game);
 
         // The rules of the game
-        String gameDescription = "Welcome to Big Pig!" + "\n" + "The Rules of the Game:" + "\n" +
-                "Each turn, a player rolls a die until either the player decides to end their turn," +
-                " or rolls an 8." + "\n" + "If they roll an 8, they will score nothing and it becomes " +
-                "the  next player's turn." + "\n" + "Any other number rolled is added to their turn " +
-                "total and their turn continues." + "\n" + "If the player chooses to end their turn, " +
-                "then their turn total is added to their score, and it becomes the next player's turn." +
-                "\n" + "The first player to score 100 or higher wins, so long as both players have had " +
-                "an equal number of turns.";
+        String gameDescription = "Welcome to Big Pig!" + "\n" + "1) Roll the dice until you get a(n) " +
+                 +  SecondFragment.defaultEvilDie + " which removes all earned points, or you end your turn " +
+                "and it becomes the next player's turn. All earned points are added to your current total." +
+                "\n" + "2) The first player to score " + SecondFragment.defaultHighScore + " wins, so long " +
+                "as both players have had an equal number of turns.";
 
         gameRules.setText(gameDescription);
 
@@ -106,6 +103,7 @@ implements OnClickListener{
                 game.setPlayer1Name(p1Name);
                 game.setPlayer2Name(p2Name);
                 if(twoPane) {
+                    game.resetGame();
                     activity.newGame(game);
                 }
                 else {

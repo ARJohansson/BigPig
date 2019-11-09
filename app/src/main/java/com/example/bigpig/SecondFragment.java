@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import android.app.Fragment;
 
+import org.w3c.dom.Text;
+
 public class SecondFragment extends Fragment
 implements OnClickListener {
 
@@ -44,23 +46,25 @@ implements OnClickListener {
 
     // Number Constants for die, score, and evil die
     public final int NUM_ONE = 1;
-    public final int NUM_EIGHT = 8;
+    public static final int NUM_EIGHT = 8;
     public final int SCORE_ONE = 75;
-    public final int SCORE_TWO = 100;
+    public static final int SCORE_TWO = 100;
     public final int SCORE_THREE = 150;
     public final int SCORE_FOUR = 200;
 
     // Set up preferences
     private SharedPreferences prefs;
     private int defaultDieNumber = NUM_ONE;
-    public int defaultEvilDie = NUM_EIGHT;
-    private int defaultHighScore = SCORE_TWO;
+    public static int defaultEvilDie = NUM_EIGHT;
+    public static int defaultHighScore = SCORE_TWO;
     public static final String NUM_DIE = "defaultDieNumber";
 
     public PigGame game;
     public TextView score1;
     public TextView score2;
     public TextView playerTurn;
+    public TextView player1Name;
+    public TextView player2Name;
     public TextView playerScore;
     public static TextView numDie;
     public ImageView dieNumber;
@@ -83,6 +87,8 @@ implements OnClickListener {
         score2 = (TextView) view.findViewById(R.id.p2ScoreTextView);
         playerTurn = (TextView) view.findViewById(R.id.turnLabel);
         playerScore = (TextView) view.findViewById(R.id.pointTotalTextView);
+        player1Name = (TextView) view.findViewById(R.id.p1ScoreLabel);
+        player2Name = (TextView) view.findViewById(R.id.p2ScoreLabel);
         numDie = (TextView) view.findViewById(R.id.numDieTextView);
         dieNumber = (ImageView) view.findViewById(R.id.diceRollImageView);
         rollDie = (Button) view.findViewById(R.id.dieRollButton);
@@ -219,8 +225,7 @@ implements OnClickListener {
             NumberFormat integer = NumberFormat.getIntegerInstance();
             score1.setText(integer.format(p1Score));
             score2.setText(integer.format(p2Score));
-            String winText = winner + " wins!";
-            playerScore.setText(winText);
+            playerScore.setText(winner);
         }
         else {
             // sets the scores using formatting
@@ -233,6 +238,8 @@ implements OnClickListener {
 
     public void DisplayPlayerName() {
         String pTurn;
+        player1Name.setText(game.getPlayer1Name());
+        player2Name.setText(game.getPlayer2Name());
         pTurn = game.getCurrentPlayer()+"'s Turn";  // we'll get who's playing now
         playerTurn.setText(pTurn);  // and set the new text
     }

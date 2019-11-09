@@ -11,10 +11,10 @@
 
     <TextView
         android:id="@+id/p1ScoreLabel"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/score"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -26,133 +26,118 @@
 
     <TextView
         android:id="@+id/p2ScoreLabel"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="91dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:layout_marginEnd="60dp"
         android:text="@string/score2"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toEndOf="@+id/p1ScoreLabel"
         app:layout_constraintTop_toTopOf="@+id/p1ScoreLabel" />
 
     <TextView
         android:id="@+id/p1ScoreTextView"
         android:layout_width="90dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="65dp"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
         android:text="@string/score1TV"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/p1ScoreLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/p1ScoreLabel"/>
+        app:layout_constraintStart_toStartOf="@+id/p1ScoreLabel"
+        app:layout_constraintTop_toBottomOf="@+id/p1ScoreLabel" />
 
     <TextView
         android:id="@+id/p2ScoreTextView"
         android:layout_width="90dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="5dp"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="65dp"
         android:text="@string/score2TV"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/p2ScoreLabel"
         app:layout_constraintStart_toStartOf="@+id/p2ScoreLabel"
         app:layout_constraintTop_toBottomOf="@+id/p2ScoreLabel" />
 
     <TextView
         android:id="@+id/turnLabel"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/turn"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/p2ScoreTextView"
         app:layout_constraintStart_toEndOf="@+id/p1ScoreTextView"
-        app:layout_constraintTop_toBottomOf="@+id/p1ScoreTextView" />
+        app:layout_constraintTop_toTopOf="@+id/p1ScoreTextView" />
 
     <ImageView
         android:id="@+id/diceRollImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="155dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/picDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/turnLabel"
         android:src="@drawable/die8side8"
-        />
+        app:layout_constraintEnd_toEndOf="@+id/turnLabel"
+        app:layout_constraintStart_toStartOf="@+id/turnLabel"
+        app:layout_constraintTop_toBottomOf="@+id/turnLabel" />
 
     <TextView
         android:id="@+id/pointLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="121dp"
+        android:layout_width="169dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="16dp"
         android:text="@string/points"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/diceRollImageView"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="@+id/diceRollImageView"
         app:layout_constraintTop_toBottomOf="@+id/diceRollImageView" />
 
     <TextView
         android:id="@+id/pointTotalTextView"
-        android:layout_width="90dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="161dp"
+        android:layout_width="150dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
         android:text="@string/pointsTV"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pointLabel"
+        app:layout_constraintStart_toStartOf="@+id/pointLabel"
         app:layout_constraintTop_toBottomOf="@+id/pointLabel" />
 
     <Button
         android:id="@+id/dieRollButton"
         android:layout_width="125dp"
         android:layout_height="45dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
         android:text="@string/dieRoll"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/pointTotalTextView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/p1ScoreLabel"
         app:layout_constraintTop_toBottomOf="@+id/pointTotalTextView" />
 
     <Button
         android:id="@+id/endTurnButton"
         android:layout_width="125dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
         android:text="@string/endTurn"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/p2ScoreLabel"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/pointTotalTextView"
         app:layout_constraintTop_toBottomOf="@+id/pointTotalTextView" />
@@ -161,13 +146,15 @@
         android:id="@+id/numDieLabel"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="@string/num_die"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/turnLabel"
-        app:layout_constraintTop_toBottomOf="@+id/turnLabel" />
+        app:layout_constraintEnd_toEndOf="@+id/p2ScoreTextView"
+        app:layout_constraintHorizontal_bias="0.314"
+        app:layout_constraintStart_toStartOf="@+id/p2ScoreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/p2ScoreTextView" />
 
     <TextView
         android:id="@+id/numDieTextView"

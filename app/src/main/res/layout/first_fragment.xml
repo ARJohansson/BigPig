@@ -11,10 +11,10 @@
 
     <TextView
         android:id="@+id/player1Label"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
         android:text="@string/player_name1"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/player2Label"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="91dp"
         android:layout_marginEnd="60dp"
@@ -43,9 +43,7 @@
         android:id="@+id/player1EditText"
         android:layout_width="125dp"
         android:layout_height="45dp"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -53,24 +51,20 @@
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/player1Label"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/player1Label"
         app:layout_constraintTop_toBottomOf="@+id/player1Label" />
 
     <EditText
         android:id="@+id/player2EditText"
         android:layout_width="125dp"
         android:layout_height="45dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/player_edit2"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="@+id/player2Label"
         app:layout_constraintStart_toStartOf="@+id/player2Label"
         app:layout_constraintTop_toBottomOf="@+id/player2Label" />
 
@@ -78,28 +72,24 @@
         android:id="@+id/newGameButton"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
         android:text="@string/newGame"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/gameRulesTextView"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/gameRulesTextView"
-        app:layout_constraintTop_toBottomOf="@+id/gameRulesTextView" />
+        app:layout_constraintEnd_toStartOf="@+id/player2EditText"
+        app:layout_constraintStart_toEndOf="@+id/player1EditText"
+        app:layout_constraintTop_toBottomOf="@+id/player2EditText" />
 
     <TextView
         android:id="@+id/gameRulesTextView"
-        android:layout_width="366dp"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/gameDescription"
         android:textAlignment="textStart"
         android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/player2EditText"
-        app:layout_constraintHorizontal_bias="0.615"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/player1EditText"
-        app:layout_constraintTop_toBottomOf="@+id/player2EditText" />
+        app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

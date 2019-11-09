@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Default layout, smaller than large, portrait and landscape -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <fragment
-        android:name="com.example.bigpig.FirstFragment"
         android:id="@+id/first_fragment"
+        android:name="com.example.bigpig.FirstFragment"
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout="@layout/first_fragment"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/second_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
-        android:name="com.example.bigpig.SecondFragment"
         android:id="@+id/second_fragment"
+        android:name="com.example.bigpig.SecondFragment"
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout="@layout/second_fragment"/>
+        android:layout="@layout/second_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/first_fragment"
+        app:layout_constraintTop_toTopOf="@+id/first_fragment" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
